@@ -13,6 +13,9 @@ public class LevelManager : MonoBehaviour
     [Header("Objetivo del nivel")]
     [SerializeField] private TMP_Text _objectiveText;
 
+    [Header("Salida")]
+    [SerializeField] private GameObject _exitBarrier; // bloquea la salida hasta recoger la flor (opcional)
+
     [Header("Siguiente nivel")]
     [SerializeField] private string _nextSceneName; // debe estar en Build Settings
 
@@ -79,6 +82,10 @@ public class LevelManager : MonoBehaviour
             return;
 
         _hasCollectedFlower = true;
+
+        // Con la flor, la salida se abre
+        if (_exitBarrier != null)
+            _exitBarrier.SetActive(false);
 
         if (_objectiveText != null)
         {
